@@ -373,3 +373,26 @@ You may also use predealing and SmartStacking, as an argument to
    deal = dealer(accept)
 
 .. vim: set fileencoding=utf-8:
+
+For Developers
+==============
+Most of the development has been done in an Anaconda environment, but it should work elsewhere. First 
+clone the repository. Next enter the repository folder and download all submodules:
+
+    git submodule update --init --recursive --remote
+
+Build the package wheel:
+
+    python setup.py bdist_wheel
+    
+Uninstall older version of the package:
+
+    pip uninstall -y redeal
+    
+Install the package:
+
+    pip install dist/redeal-0.2.0-py3-none-any.whl
+    
+Run the tests. If using Anaconda environment or virtualenv make sure that pytest is installed in the environment.
+
+    pytest
