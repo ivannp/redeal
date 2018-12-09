@@ -2,6 +2,7 @@
 from __future__ import division, print_function
 # for pypy compatibility we do not use unicode_literals in this module
 from ctypes import *
+import json
 import os
 import sys
 import warnings
@@ -107,6 +108,15 @@ def _solve_board(deal, strain, leader, target, sol, mode):
     return futp
 
 
+def calc_tables(deal):
+    hands_pbn = "N:{} {} {} {}".format(deal.north._pbn_str(), deal.east._pbn_str(), deal.south._pbn_str(), deal.west._pbn_str())
+    json_in = json.dumps({'pbn': hands_pbn}).encode('ascii')
+    ptr = dll.JsonApi_CalcAllTables(json_in)
+    json_out = c_char_p(ptr).value.decode("utf-8")
+    dll.JsonApi_FreeCPtr(ptr)
+    return json.loads(json_out)
+
+
 def solve(deal, strain, declarer):
     """Return the number of tricks for declarer; wraps SolveBoard.
     """
@@ -170,6 +180,11 @@ if dll_name and os.path.exists(dll_path):
         Deal, c_int, c_int, c_int, POINTER(FutureTricks), c_int]
     dll.SolveBoardPBN.argtypes = [
         DealPBN, c_int, c_int, c_int, POINTER(FutureTricks), c_int]
+    dll.JsonApi_CalcAllTables.argtypes = [c_char_p]
+    dll.JsonApi_CalcAllTables.restype = c_void_p
+    dll.JsonApi_FreeCPtr.argtypes = [c_void_p]
+    dll.JsonApi_FreeCPtr.restype = None
+   
     if os.name == "posix":
         dll.SetMaxThreads(0)
 else:
@@ -181,3 +196,6 @@ else:
 
     def solve_all(deal, strain, declarer):
         raise Exception("Unable to load DDS.  `solve_all` is unavailable.")
+
+    def calc_tables(deal):
+        raise Exception("Unable to load DDS.  `calc_tables` is unavailable.")

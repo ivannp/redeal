@@ -366,6 +366,8 @@ class Deal(tuple, object):
         """
         return dds.solve_all(self, strain, leader)
 
+    def dd_table(self):
+        return dds.calc_tables(self)
 
 class Hand(tuple, object):
     """A hand, represented as a tuple of holdings.
