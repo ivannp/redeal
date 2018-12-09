@@ -1,3 +1,4 @@
 [submodule "dds"]
 	path = dds
-	url = https://github.com/ivannp/dds.git
+    url = https://github.com/ivannp/dds.git
+    branch = master
