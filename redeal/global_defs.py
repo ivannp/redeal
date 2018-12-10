@@ -23,8 +23,8 @@ Seat.__add__ = lambda self, val: Seat((self.value + val) % len(Seat))
 
 class Suit(_Enum):
     S = 0, " S", "♠"
-    H = 1, " H", "♡"
-    D = 2, " D", "♢"
+    H = 1, " H", "♥"
+    D = 2, " D", "♦"
     C = 3, " C", "♣"
 
     def __init__(self, value, sym, unicode_sym):
