@@ -1,0 +1,18 @@
+version: "0.8.{build}"
+
+image: ubuntu
+
+platform: x64
+
+configuration:
+  - Release
+
+init:
+  - pwd
+
+build: off
+
+build_script:
+  - cd redeal/dds/src
+  - cp Makefiles/Makefile_linux_shared Makefile
+  - make -j4
