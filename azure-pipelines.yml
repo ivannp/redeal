@@ -11,6 +11,7 @@ pool:
 
 steps:
 - script: |
+    git submodule update --init --recursive
     cd dds/src
     cp Makefiles/Makefile_linux_shared ./Makefile
     make
