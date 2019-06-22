@@ -7,9 +7,13 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-18.04'
 
 steps:
+- task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7'
+      architecture: 'x64'
 - script: |
     git submodule update --init --recursive
     cd dds/src
@@ -18,4 +22,4 @@ steps:
     sed -i 's/^THREAD_COMPILE.*/THREAD_COMPILE  =/' Makefile
     sed -i 's/^THREAD_LINK.*/THREAD_LINK     =/' Makefile
     make
-    python3 --version
+    python --version
