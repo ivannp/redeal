@@ -19,6 +19,7 @@ steps:
 
 - script: |
     git submodule update --init --recursive
+    pip install pytest-runner
     python setup.py bdist_wheel
 #    cd dds/src
 #    cp Makefiles/Makefile_linux_shared ./Makefile
