@@ -9,6 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: pwd
-- script: ls
+steps: |
+    cd dds/src
+    cp Makefiles/Makefile_linux_shared ./Makefile
+    make
