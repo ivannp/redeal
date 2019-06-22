@@ -11,9 +11,9 @@ pool:
 
 steps:
 - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.7'
-      architecture: 'x64'
+  inputs:
+    versionSpec: '3.7'
+    architecture: 'x64'
 
 - script: |
     git submodule update --init --recursive
