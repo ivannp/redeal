@@ -10,4 +10,5 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- script: pwd
 - script: ls
