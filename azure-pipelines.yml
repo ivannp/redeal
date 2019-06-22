@@ -18,3 +18,4 @@ steps:
     sed -i 's/^THREAD_COMPILE.*/THREAD_COMPILE  =/' Makefile
     sed -i 's/^THREAD_LINK.*/THREAD_LINK     =/' Makefile
     make
+    python3 --version
